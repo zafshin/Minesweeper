@@ -1,0 +1,18 @@
+Fitter Status : Successful - Tue Jan 17 20:40:11 2023
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : vga1
+Top-level Entity Name : DE10_LITE_Golden_Top
+Family : MAX 10
+Device : 10M50DAF484C6GES
+Timing Models : Preliminary
+Total logic elements : 6,719 / 49,760 ( 14 % )
+    Total combinational functions : 6,022 / 49,760 ( 12 % )
+    Dedicated logic registers : 4,011 / 49,760 ( 8 % )
+Total registers : 4080
+Total pins : 130 / 360 ( 36 % )
+Total virtual pins : 0
+Total memory bits : 989,824 / 1,677,312 ( 59 % )
+Embedded Multiplier 9-bit elements : 6 / 288 ( 2 % )
+Total PLLs : 1 / 4 ( 25 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 2 ( 0 % )

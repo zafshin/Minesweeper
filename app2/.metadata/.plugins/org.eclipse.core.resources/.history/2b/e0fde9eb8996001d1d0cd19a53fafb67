@@ -1,0 +1,73 @@
+#include "renderer.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <system.h>
+	bool mines[8][8];
+	unsigned short numbers[8][8];
+	graphicObj *ptro[8][8];
+	void showMines();
+int main(){
+	Renderer *en;
+	en = new Renderer();
+
+	for(int y = 0; y<8;y++){
+	for(int i = 0; i<8;i++){
+		graphicObj box1;
+		box1.color.B = 0.6;
+		box1.color.R = 0;
+		box1.color.G = 0;
+		box1.position.x = -1+ 0.25+( i*0.2);
+		box1.position.y = 0.9 - 1.3*(float)y/7;
+		box1.size.x = 0.07;
+		box1.size.y = 0.07;
+		box1.typee = box;
+		en->addObj(box1);
+
+	}
+	}
+	int selectedx=0;
+	int selectedy=0;
+	srand((int)((en->getGX()*20)+ (en->getGY()* 60)));
+
+	int l =0;
+	for(int i = 0; i < 8; i++){
+		for(int j = 0; j < 8; j++){
+			mines[i][j]= (bool)((rand()% 64) > 59);
+			//ptro[j][i] = en->getPtrBuffer(l);
+			l++;
+			}
+	}
+	for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+				mines[i][j]= (bool)((rand()% 64) > 59);
+				//ptro[j][i] = en->getPtrBuffer(l);
+				l++;
+				}
+		}
+
+	showMines();
+	while(1){
+		int x = ((-en->getGX())+1) * 4;
+		int y = (en->getGY()+1) * 4;
+		if ((x < 8) & (y<8)){
+		ptro[selectedx][selectedy]->color.G =0.0;
+		selectedx = x;
+		selectedy = y;
+		ptro[selectedx][selectedy]->color.G =0.5;
+		}
+		printf("x=%li y=%li\n",x,y);
+		en->Render();
+	}
+	return 0;
+}
+
+void showMines(){
+	for(int i =0; i<8;i++){
+		for(int j=0; j<8 ; j++){
+			if(mines[i][j])
+				ptro[i][j]->color.R = 1;
+		}
+	}
+}
+

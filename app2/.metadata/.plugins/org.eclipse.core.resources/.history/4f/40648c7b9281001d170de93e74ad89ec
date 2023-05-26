@@ -1,0 +1,57 @@
+#include "renderer.h"
+Renderer::Renderer(){
+	  charBuffer = alt_up_char_buffer_open_dev("/dev/charbuff");
+	  if ( charBuffer == NULL)
+		  log += "Error: could not open character buffer device \n";
+	  	else
+	  		log += "Opened character buffer device \n";
+	  pixelBuffer = alt_up_pixel_buffer_dma_open_dev ("/dev/pixelbuff");
+	  if ( pixelBuffer == NULL){
+		  log += "Error: could not open pixel buffer device \n";
+	  }
+	  	else
+	  	log += "Opened pixel buffer device \n";
+	  gyro = alt_up_accelerometer_spi_open_dev("/dev/accelerometer_spi_0");
+}
+void Renderer::Render(){
+	int len = graphicBuffer.size();
+	alt_up_pixel_buffer_dma_clear_screen(pixelBuffer,0);
+	unsigned char color = 0;
+	unsigned char posX = 0;
+	unsigned char posY = 0;
+	unsigned char sizX = 0;
+	unsigned char sizY = 0;
+	for(int i = 0; i < len; i++){
+		graphicObj* tmp = *graphicBuffer[i];
+		switch(tmp->type){
+		case objType::box:
+			color = 0;
+			color = ((tmp->color.R * 7) << 5);
+			color = color | ((tmp->color.G * 7) << 2);
+			color = color | (tmp->color.B * 3);
+			posX = (tmp->position.x * 80)  + 80;
+			posY = (tmp->position.y * 60)  + 60;
+			sizX = (tmp->size.x * 160);
+			sizY = (tmp->size.y * 120);
+			alt_up_pixel_buffer_dma_draw_box(pixelBuffer,posX,posY,posX + sizX,posY + sizY,color,0);
+			break;
+		case objType::line:
+			color = 0;
+			color = ((tmp->color.R * 7) << 5);
+			color = color | ((tmp->color.G * 7) << 2);
+			color = color | (tmp->color.B * 3);
+
+			break;
+
+		case objType::text:
+
+			break;
+		}
+
+	}
+
+
+}
+void Renderer::addObj(graphicObj obj){
+	graphicBuffer.push_back(obj);
+	}

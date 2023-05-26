@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;test/renderer.hpp&apos; to &apos;renderer.h&apos;" description="Rename resource &apos;renderer.hpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="renderer.hpp" name="renderer.h" stamp="1671670010672" updateReferences="true"/>
+</session>

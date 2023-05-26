@@ -1,0 +1,16 @@
+Info: Using NativeLink to launch synthesis Tool
+Error: Can't open Synplify parts mapping file lib/altera/realpart.txt from Synplify installation
+Error: Can't launch the Synplify Pro software -- the path to the location of the executables for the Synplify Pro software not specified.
+Error: You can specify the path to the executable in the EDA Tool Options page of the Options dialog box or using the Tcl command set_user_option.
+Error: Encountered error while running NativeLink synthesis script
+Error: NativeLink flow failed to complete synthesis
+
+================The following information is provided to Debug NativeLink Script=================
+Nativelink TCL script failed with errorCode:  NONE
+Nativelink TCL script failed with errorInfo:  
+    while executing
+"error ""  """
+    (procedure "launch_synplify" line 54)
+    invoked from within
+"launch_synplify synplify_pro "
+PATH Environment Variable is set to :  c:\intelfpga_lite\18.1\quartus\bin64\;c:\intelfpga_lite\18.1\quartus\bin64\;C:\VulkanSDK\1.3.216.0\Bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Git\cmd;C:\Program Files\CMake\bin;C:\Program Files\WireGuard\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files (x86)\Bitvise SSH Client;C:\Users\Afshin\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\Afshin\AppData\Local\Programs\Python\Python311\;C:\Users\Afshin\AppData\Local\activestate\cache\bin;C:\Users\Afshin\AppData\Local\ActiveState\StateTool\release\bin;C:\Users\Afshin\.cargo\bin;C:\Users\Afshin\AppData\Local\Microsoft\WindowsApps;C:\Users\Afshin\.dotnet\tools;;C:\intelFPGA_lite\21.1\questa_fse\win64;C:\intelFPGA_lite\21.1\questa_fe\win64;C:\Users\Afshin\AppData\Roaming\npm;C:\intelFPGA_lite\18.1\modelsim_ase\win32aloem

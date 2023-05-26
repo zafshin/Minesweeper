@@ -1,0 +1,60 @@
+
+#include <stdio.h>
+#include <altera_up_avalon_accelerometer_spi.h>
+#include <altera_up_avalon_video_pixel_buffer_dma.h>
+#include <altera_up_avalon_video_character_buffer_with_dma.h>
+#include <unistd.h>
+#include <system.h>
+#include <altera_avalon_pio_regs.h>
+#include <alt_types.h>
+#include <string>
+#include <vector>
+
+#define ResX 160
+#define ResY 120
+
+enum objType { box = 0, line = 1, text = 2};
+struct objSize{
+    float x,y;
+};
+struct objPosition{
+	float x,y;
+};
+struct objColor{
+	float R,G,B;
+};
+
+struct objText{
+	char text[];
+};
+
+struct graphicObj{
+	objType typee;
+	objSize size;
+	objPosition position;
+	objColor color;
+	objText text;
+};
+
+
+class Renderer{
+public:
+	 Renderer();
+	 void Render();
+	 void addObj(graphicObj obj);
+	 graphicObj* getPtrBuffer(int index);
+	 float getGX();
+	 float getGY();
+	 int bufferSize();
+
+
+private:
+	alt_32 xAccel = 0;
+	alt_32 yAccel = 0;
+	alt_32 zAccel = 0;
+	alt_up_accelerometer_spi_dev* gyro;
+	alt_up_char_buffer_dev * charBuffer;
+	alt_up_pixel_buffer_dma_dev * pixelBuffer;
+	std::vector<graphicObj> graphicBuffer;
+	std::string log;
+};

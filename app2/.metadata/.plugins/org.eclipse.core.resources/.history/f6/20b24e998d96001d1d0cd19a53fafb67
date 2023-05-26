@@ -1,0 +1,78 @@
+#include "renderer.h"
+Renderer::Renderer(){
+	  charBuffer = alt_up_char_buffer_open_dev("/dev/charbuff");
+	  if ( charBuffer == NULL)
+		  log += "Error: could not open character buffer device \n";
+	  	else
+	  		log += "Opened character buffer device \n";
+	  pixelBuffer = alt_up_pixel_buffer_dma_open_dev ("/dev/pixelbuff");
+	  if ( pixelBuffer == NULL){
+		  log += "Error: could not open pixel buffer device \n";
+	  }
+	  	else
+	  	log += "Opened pixel buffer device \n";
+	  gyro = alt_up_accelerometer_spi_open_dev("/dev/accelerometer_spi_0");
+}
+void Renderer::Render(){
+	int len = graphicBuffer.size();
+
+	unsigned char color = 0;
+	unsigned char posX = 0;
+	unsigned char posY = 0;
+	unsigned char sizX = 0;
+	unsigned char sizY = 0;
+	alt_up_pixel_buffer_dma_clear_screen(pixelBuffer,0);
+	alt_up_char_buffer_clear(charBuffer);
+	for(int i = 0; i < len; i++){
+		graphicObj* tmp = &graphicBuffer[i];
+		switch(tmp->typee){
+		case 0:
+			color = 0;
+			color = (((unsigned char)(tmp->color.R * 7)) << 5);
+			color = color | (((unsigned char)(tmp->color.G * 7)) << 2);
+			color = color | (unsigned char)(tmp->color.B * 3);
+			posX = (tmp->position.x * 80)  + 80;
+			posY = ((-tmp->position.y) * 60)  + 60;
+			sizX = (tmp->size.x * 160);
+			sizY = (tmp->size.y * 120);
+			alt_up_pixel_buffer_dma_draw_box(pixelBuffer,posX,posY,posX + sizX,posY + sizY,color,0);
+			break;
+		case 1:
+			color = 0;
+			color = ((unsigned char)(tmp->color.R * 7) << 5);
+			color = color | ((unsigned char)(tmp->color.G * 7) << 2);
+			color = color | (unsigned char)(tmp->color.B * 3);
+
+			break;
+
+		case 2:
+			posX = (tmp->position.x+1) * 42;
+			posY = (-tmp->position.y+1) * 32;
+			alt_up_char_buffer_string(charBuffer, tmp->text.text.c_str(), posX, posY);
+			break;
+		}
+
+	}
+	usleep(100000);
+
+
+}
+void Renderer::addObj(graphicObj obj){
+	graphicBuffer.push_back(obj);
+	}
+
+float Renderer::getGX(){
+	alt_up_accelerometer_spi_read_x_axis(gyro, &xAccel);
+	return (float)xAccel /256.0;
+}
+float Renderer::getGY(){
+	alt_up_accelerometer_spi_read_y_axis(gyro, &yAccel);
+	return (float)yAccel /256.0;
+}
+graphicObj* Renderer::getPtrBuffer(int index){
+	return &graphicBuffer[index];
+}
+int Renderer::bufferSize(){
+	return graphicBuffer.size();
+
+}

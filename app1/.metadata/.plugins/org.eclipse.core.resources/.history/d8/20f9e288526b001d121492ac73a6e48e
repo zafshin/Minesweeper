@@ -1,0 +1,49 @@
+/*
+
+ * "Hello World" example.
+ *
+ * This example prints 'Hello from Nios II' to the STDOUT stream. It runs on
+ * the Nios II 'standard', 'full_featured', 'fast', and 'low_cost' example
+ * designs. It runs with or without the MicroC/OS-II RTOS and requires a STDOUT
+ * device in your system's hardware.
+ * The memory footprint of this hosted application is ~69 kbytes by default
+ * using the standard reference design.
+ *
+ * For a reduced footprint version of this template, and an explanation of how
+ * to reduce the memory footprint for a given application, see the
+ * "small_hello_world" template.
+ *
+ */
+#include <altera_up_avalon_video_pixel_buffer_dma.h>
+#include <stdio.h>
+#include <system.h>
+#include <unistd.h>
+#include <string>
+void moveit(int x, int y);
+void initVGA();
+
+alt_up_pixel_buffer_dma_dev * pixel_buf_dma_dev;
+int main()
+{
+	//printf ("Call init \n");
+	pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev ("/dev/video_pixel_buffer_dma_0");
+	if ( pixel_buf_dma_dev == NULL)
+	printf ("Error: could not open pixel buffer device \n");
+	else
+	//printf ("Opened pixel buffer device \n");
+	alt_up_pixel_buffer_dma_clear_screen (pixel_buf_dma_dev, 0);
+	alt_up_pixel_buffer_dma_clear_screen (pixel_buf_dma_dev, 1);
+	alt_up_pixel_buffer_dma_draw_box(pixel_buf_dma_dev, 10, 10, 5 + 10, 5 + 10, 0xF800, 1);
+	initVGA();
+	while(1){
+
+	}
+
+  return 0;
+}
+void moveit(int x, int y){
+
+}
+void initVGA(){
+
+}

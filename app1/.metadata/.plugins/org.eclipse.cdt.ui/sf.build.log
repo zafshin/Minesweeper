@@ -1,0 +1,29 @@
+21:49:25 **** Incremental Build of configuration Nios II for project sf ****
+make all 
+Info: Building ../sf_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../sf_bsp/
+[BSP build complete]
+Info: Compiling hello_world.c to obj/default/hello_world.o
+nios2-elf-gcc -xc -MP -MMD -c -I../sf_bsp//HAL/inc -I../sf_bsp/ -I../sf_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mhw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world.o hello_world.c
+hello_world.c: In function 'main':
+hello_world.c:39:20: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+  unsigned char a = "hello";
+                    ^
+hello_world.c:52:40: warning: passing argument 2 of 'alt_up_char_buffer_draw' makes integer from pointer without a cast [-Wint-conversion]
+  alt_up_char_buffer_draw(char_buf_dev, "hhhhhhhhh",10, 10);
+                                        ^
+In file included from hello_world.c:17:0:
+../sf_bsp//drivers/inc/altera_up_avalon_video_character_buffer_with_dma.h:71:5: note: expected 'unsigned char' but argument is of type 'char *'
+ int alt_up_char_buffer_draw(alt_up_char_buffer_dev *char_buffer, unsigned char ch, 
+     ^
+Info: Linking sf.elf
+nios2-elf-g++  -T'../sf_bsp//linker.x' -msys-crt0='../sf_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../sf_bsp/   -Wl,-Map=sf.map   -O0 -g -Wall   -mhw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o sf.elf obj/default/hello_world.o -lm -msys-lib=m
+nios2-elf-insert sf.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name soc1 --quartus_project_dir "C:/Users/Afshin/Desktop/vga/p1" --jdi ../..//output_files/vga1.jdi --sopcinfo C:/Users/Afshin/Desktop/vga/p1/software/sf_bsp/../../soc1.sopcinfo
+Info: (sf.elf) 36 KBytes program size (code + initialized data).
+Info:          65492 KBytes free for stack + heap.
+Info: Creating sf.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source sf.elf >sf.objdump
+[sf build complete]
+
+21:49:27 Build Finished (took 2s.263ms)
+
